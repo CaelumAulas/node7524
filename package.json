@@ -1,0 +1,23 @@
+{
+  "name": "node7524",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CaelumAulas/node7524.git"
+  },
+  "author": "Marco Bruno",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/CaelumAulas/node7524/issues"
+  },
+  "homepage": "https://github.com/CaelumAulas/node7524#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.3"
+  }
+}
