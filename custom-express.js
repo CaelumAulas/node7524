@@ -1,6 +1,4 @@
-module.exports = function (port) {
-  console.log('EITA', port)
-  // const express = require('express')()
+module.exports = function () {
   const express = require('express')
   const app = express() // http.createServer
 
@@ -15,8 +13,5 @@ module.exports = function (port) {
     res.render('produtos/lista')
   })
 
-  return {
-    app: app,
-    express: express
-  }
+  return app
 }
