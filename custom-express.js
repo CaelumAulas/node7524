@@ -5,13 +5,11 @@ module.exports = function () {
   app.set('view engine', 'ejs')
 
   // app.get('/', function() {})
-  app.get('/', (req, res) => {
-    res.render('home/index')
-  })
+  app.get('/', (req, res) => res.render('home/index'))
 
-  app.get('/produtos', function(req, res) {
-    res.render('produtos/lista')
-  })
+  // const produtosRoutes = require('./routes/produtos')
+  // produtosRoutes(app)
+  require('./routes/produtos')(app)
 
   return app
 }
