@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/CaelumAulas/node7524#readme",
   "dependencies": {
+    "dotenv": "^6.0.0",
     "ejs": "^2.6.1",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "mysql": "^2.15.0"
   }
 }

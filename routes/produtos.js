@@ -1,9 +1,7 @@
 module.exports = (app) => {
-  app.get('/produtos', (req, res) => {
-    res.render('produtos/lista.ejs')
-  })
+  const ProductController = require('../controller/ProductController')
 
-  app.get('/produtos/form', (req, res) => {
-    res.render('produtos/form.ejs')
-  })
+  app.get('/produtos', ProductController.list)
+  app.post('/produtos', ProductController.create)
+  app.get('/produtos/form', ProductController.show)
 }
