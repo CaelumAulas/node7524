@@ -4,7 +4,7 @@ const connectionFactory = require('../infra/connectionFactory')
 const ProductController = {}
 
 
-ProductController.list = (req, res) => {
+ProductController.list = (req, res, next) => {
   const connection = connectionFactory()
   const productDao = new ProductDao(connection)
 
@@ -12,14 +12,14 @@ ProductController.list = (req, res) => {
     if(!error){
       res.render('produtos/lista.ejs', { livros:  livros })
     } else {
-      res.render("erros/500", {erro: error.message})
+      next(error.message)
     }
   })
 
   connection.end()
 }
 
-ProductController.create = (req, res) => {
+ProductController.create = (req, res, next) => {
   const livroNovo = req.body
 
   const connection = connectionFactory()
@@ -29,7 +29,7 @@ ProductController.create = (req, res) => {
     if(!erro){
       res.redirect('/produtos')
     } else {
-      res.render("erros/500", {erro: erro.message})
+      next(error.message)
     }
   })
 }
