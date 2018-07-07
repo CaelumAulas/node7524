@@ -20,12 +20,20 @@ module.exports = function () {
 
   require('./routes/produtos')(app)
 
+  require('./routes/promocoes')(app)
+
   app.use((req, res, next) => {
-    res.render("erros/500", {erro: "404 - Página não encontrada"})
+    res.status(404).render("erros/500", {erro: "404 - Página não encontrada"})
   })
 
   app.use((erro, req, res, next) => {
-    res.render("erros/500", {erro: erro})
+    res
+      .status(500)
+      .format({
+        html: () => res.render("erros/500", {erro: erro}),
+        json: () => res.send(erro)
+      })
+    
   })
 
   return app

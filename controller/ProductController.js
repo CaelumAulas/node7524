@@ -10,7 +10,12 @@ ProductController.list = (req, res, next) => {
 
   productDao.list((error, livros, fields) => {
     if(!error){
-      res.render('produtos/lista.ejs', { livros:  livros })
+
+      res.format({
+        html: () => res.render('produtos/lista.ejs', { livros:  livros }),
+        json: () => res.send(livros)
+      })
+
     } else {
       next(error.message)
     }
@@ -46,7 +51,9 @@ ProductController.create = (req, res, next) => {
       })
     })
     .catch((erros) => {
-      res.render('produtos/form.ejs', {validationErrors: erros})
+      res
+        .status(400)
+        .render('produtos/form.ejs', {validationErrors: erros})
     })
 
 }
