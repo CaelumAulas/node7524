@@ -4,7 +4,9 @@ class ProductDao {
   }
 
   list(callback) {
-    this._connection.query('SELECT * FROM livros', callback)
+    //  return new Promise(() => {
+       this._connection.query('SELECT * FROM livros', callback)
+    //  })
   }
   
   save(livro, callback){

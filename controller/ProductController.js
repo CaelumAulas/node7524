@@ -16,45 +16,43 @@ ProductController.list = (req, res, next) => {
     }
   })
 
+  // productDao.list()
+  //   .then(() => res.render('produtos/lista.ejs', { livros:  livros }))
+  //   .catch((error) => next(error.message))
+
   connection.end()
 }
 
 ProductController.create = (req, res, next) => {
   const livroNovo = req.body
 
-  const connection = connectionFactory()
-  const productDao = new ProductDao(connection)
+  req.assert('titulo', "Título vazio").notEmpty()
+  req.assert('preco', "Preco inválido").isNumeric()
+  
+  // retorna uma promise
+  const promiseValidacao = req.asyncValidationErrors()
 
-  productDao.save(livroNovo, (erro) => {
-    if(!erro){
-      res.redirect('/produtos')
-    } else {
-      next(error.message)
-    }
-  })
+  promiseValidacao
+    .then(() => {
+      const connection = connectionFactory()
+      const productDao = new ProductDao(connection)
+    
+      productDao.save(livroNovo, (erro) => {
+          if(!bla){
+            res.redirect('/produtos')
+          } else {
+            next(erro.message)
+          }
+      })
+    })
+    .catch((erros) => {
+      res.render('produtos/form.ejs', {validationErrors: erros})
+    })
+
 }
 
-// const queryString = require("query-string")
-
-// ProductController.criaBody = (req, res, next) => { 
-
-//   let bodyString = ""
-    
-//   req.on("data", (chunk) => {
-//     bodyString += chunk.toString()
-//   })
-
-//   req.on("end", bodyPronto)
-
-//   function bodyPronto(){
-//     req.body = queryString.parse(bodyString)
-//     console.log("Criou o Body")
-//     next()
-//   }
-// }
-
 ProductController.show = (req, res) => {
-  res.render('produtos/form.ejs')
+  res.render('produtos/form.ejs', {validationErrors: []})
 }
 
 module.exports = ProductController

@@ -2,6 +2,13 @@
 
 <div>
     <div class ="container min-container">
+
+        <% validationErrors.forEach(function(erro) { %>
+        <div class="alert alert-danger">
+            <%= erro.msg %>
+        </div>
+        <% }) %>
+
         <h2 class="basic-title">Add</h2>
 
         <form action="/produtos" method="post" class="well" role="form">

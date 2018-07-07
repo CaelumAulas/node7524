@@ -9,11 +9,15 @@ module.exports = function () {
   app.use(express.urlencoded())
   app.use(express.json())
 
+  const expressValidator = require('express-validator')
+  app.use(expressValidator())
+
   // app.get('/', function() {})
   app.get('/', (req, res) => res.render('home/index'))
 
   // const produtosRoutes = require('./routes/produtos')
   // produtosRoutes(app)
+
   require('./routes/produtos')(app)
 
   app.use((req, res, next) => {
